@@ -79,4 +79,37 @@ $(function () {
         });
     });
 
+
+    $(".personal-form").on("submit", function (e) {
+        e.preventDefault();
+
+        $('.order-error').html('');
+
+        $.ajax({
+            url: "/ajx/authProcess.php",
+            type: "post",
+            dataType: "json",
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
+            success: function (data, status) {
+                console.log(data);
+
+                if(data.SUCCESS) {
+                    if(data.REDIRECT) {
+                        window.location.href = data.REDIRECT;
+                    }
+                    if(data.MESSAGE) {
+                        alert(data.MESSAGE);
+                    }
+                } else {
+                    $('.personal-error').html(data.MESSAGE);
+                }
+            },
+            error: function (xhr, desc, err) {
+                //console.log(err);
+            },
+        });
+    });
+
 });
