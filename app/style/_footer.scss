@@ -1,0 +1,48 @@
+#footer {
+  background: $black;
+  text-align: center;
+
+  .footer-content {
+    padding: 60px;
+  }
+
+  .logo {
+    svg {
+      width: 66px;
+    }
+  }
+
+  p {
+    margin: 30px 0;
+    font-size: 24px;
+    color: $white;
+  }
+
+  a {
+    font-size: 24px;
+    color: $white;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  @include media-breakpoint-down(sm) {
+    .footer-content {
+      padding: 30px;
+    }
+
+    .logo {
+      svg {
+        width: 32px;
+      }
+    }
+
+    p {
+      margin: 12px 0;
+      font-size: 12px;
+    }
+
+    a {
+      font-size: 12px;
+    }
+  }
+}

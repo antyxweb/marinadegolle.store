@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100">
+  <head>
+    //= template/head.html
+
+    <title>Каталог - Marina De Golle</title>
+  </head>
+  <body class="d-flex flex-column">
+    //= template/header.html
+
+    <main id="main" class="flex-shrink-0 mb-auto">
+
+      <section id="product">
+        <div class="row">
+          <div class="product-slider col-12 col-md-6 pb-5">
+            <ul id="vertical">
+              <li data-thumb="/upload/catalog-3.png">
+                <div class="embed-responsive embed-responsive-1by1" style="background-image: url('/upload/catalog-3.png')"></div>
+              </li>
+              <li data-thumb="/upload/catalog-3.png">
+                <div class="embed-responsive embed-responsive-1by1" style="background-image: url('/upload/catalog-3.png')"></div>
+              </li>
+              <li data-thumb="/upload/catalog-3.png">
+                <div class="embed-responsive embed-responsive-1by1" style="background-image: url('/upload/catalog-3.png')"></div>
+              </li>
+              <li data-thumb="/upload/catalog-3.png">
+                <div class="embed-responsive embed-responsive-1by1" style="background-image: url('/upload/catalog-3.png')"></div>
+              </li>
+            </ul>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="product-info">
+              <h1 class="mb-md-4">Сумка</h1>
+              <div class="price mb-md-4">70 000 руб.</div>
+              <div class="description d-none d-md-block">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat, augue a volutpat hendrerit, sapien tortor faucibus augue, a maximus elit ex vitae libero. Sed quis mauris eget arcu facilisis consequat sed eu felis. </p>
+              </div>
+
+              <div class="product-action d-flex my-3 py-3 my-md-4 py-md-5">
+                <div class="product-counter d-none d-lg-flex mr-4">
+                  <button>&mdash;</button>
+                  <input type="text" value="1">
+                  <button>+</button>
+                </div>
+                <button class="to-cart btn btn-primary p-3 d-block text-uppercase">Добавить в корзину</button>
+                <button class="to-favorites d-none d-lg-block ml-4">
+                  <svg width="19" height="17" viewBox="0 0 19 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_38_148)">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M2.38755 2.73291C1.77787 3.5289 1.44694 4.63511 1.44694 5.80381C1.44694 6.99805 1.91622 8.19873 2.68333 9.35819C3.4491 10.5157 4.48342 11.5887 5.54029 12.5121C6.59435 13.4331 7.65188 14.1887 8.4476 14.7148C8.84473 14.9773 9.17481 15.1815 9.4044 15.3194C9.40422 15.3193 9.40468 15.3195 9.4044 15.3194C9.4046 15.3193 9.40546 15.3195 9.40575 15.3194C9.63533 15.1815 9.96544 14.9773 10.3626 14.7148C11.1583 14.1887 12.2158 13.4331 13.2699 12.5121C14.3267 11.5887 15.361 10.5157 16.1269 9.35819C16.8939 8.19873 17.3632 6.99805 17.3632 5.80381C17.3632 4.63381 17.0347 3.52772 16.4267 2.73233C15.8344 1.95743 14.9582 1.44694 13.7459 1.44694C12.5137 1.44694 11.5867 1.95732 10.9534 2.48504C10.6364 2.74925 10.3984 3.01375 10.2413 3.21017C10.1631 3.30799 10.1058 3.38776 10.0696 3.44055C10.0515 3.4669 10.0387 3.48641 10.0314 3.49793C10.0277 3.50369 10.0253 3.50743 10.0244 3.50904C10.0239 3.50985 10.0242 3.50933 10.0244 3.50904L9.40768 4.53691L8.78762 3.51203C8.78782 3.51232 8.78811 3.51284 8.78762 3.51203C8.78704 3.51111 8.78551 3.50872 8.78416 3.50648C8.78301 3.50472 8.78166 3.50256 8.78002 3.5C8.77247 3.48843 8.75966 3.46885 8.74141 3.44243C8.70485 3.38951 8.64707 3.30957 8.56828 3.2116C8.41006 3.01487 8.17084 2.75002 7.85282 2.48551C7.21712 1.95688 6.28998 1.44694 5.06428 1.44694C3.85867 1.44694 2.98194 1.95687 2.38755 2.73291ZM9.40509 16.1575L9.7561 16.79L9.40509 16.9848L9.05405 16.79L9.40509 16.1575ZM1.23884 1.85308C2.09441 0.736028 3.38805 0 5.06428 0C6.72039 0 7.96365 0.695832 8.77797 1.37299C9.02327 1.57698 9.23173 1.78085 9.40365 1.96657C9.57485 1.78093 9.78264 1.57725 10.0272 1.37346C10.8408 0.695397 12.0842 0 13.7459 0C15.4274 0 16.7217 0.735478 17.5763 1.85366C18.4152 2.95133 18.8102 4.3854 18.8102 5.80381C18.8102 7.37802 18.1943 8.85573 17.3335 10.1566C16.4715 11.4595 15.3355 12.6288 14.2219 13.6018C13.1056 14.5771 11.9927 15.3717 11.1606 15.9218C10.7438 16.1974 10.3958 16.4127 10.1505 16.5599C10.0279 16.6336 9.9309 16.6902 9.86376 16.7289C9.8302 16.7482 9.80406 16.763 9.78592 16.7733C9.77685 16.7785 9.7698 16.7824 9.76479 16.7852C9.76229 16.7866 9.76036 16.7877 9.75892 16.7885L9.7561 16.79C9.75593 16.7902 9.7561 16.79 9.40509 16.1575C9.05405 16.79 9.05425 16.7902 9.05405 16.79L9.05126 16.7885C9.04982 16.7877 9.04789 16.7866 9.04538 16.7852C9.04034 16.7824 9.03332 16.7785 9.02425 16.7733C9.00612 16.763 8.97998 16.7482 8.94641 16.7289C8.87928 16.6902 8.78232 16.6336 8.65963 16.5599C8.41441 16.4127 8.06636 16.1974 7.64957 15.9218C6.81749 15.3717 5.70458 14.5771 4.58827 13.6018C3.4747 12.6288 2.33864 11.4595 1.47661 10.1566C0.615923 8.85573 0 7.37802 0 5.80381C0 4.38411 0.398562 2.95015 1.23884 1.85308Z" fill="#1D1D1D"/>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_38_148">
+                        <rect width="19" height="16.9848" fill="white"/>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </button>
+              </div>
+
+              <div class="description d-md-none">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat, augue a volutpat hendrerit, sapien tortor faucibus augue, a maximus elit ex vitae libero. Sed quis mauris eget arcu facilisis consequat sed eu felis. </p>
+              </div>
+
+              <ul class="params">
+                <li>
+                  <span>Артикул:</span> DB1852410YG
+                </li>
+                <li>
+                  <span>Категория:</span> Сумки - Классик
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="my-4 py-md-5">
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#description">Описание</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#characteristics">Дополнительная информация</a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="description">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat, augue a volutpat hendrerit, sapien tortor faucibus augue, a maximus elit ex vitae libero. Sed quis mauris eget arcu facilisis consequat sed eu felis. </p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat, augue a volutpat hendrerit, sapien tortor faucibus augue, a maximus elit ex vitae libero. Sed quis mauris eget arcu facilisis consequat sed eu felis. </p>
+            </div>
+            <div class="tab-pane fade" id="characteristics">
+              <ul class="params">
+                <li>
+                  <span>Артикул:</span> DB1852410YG
+                </li>
+                <li>
+                  <span>Категория:</span> Сумки - Классик
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="section-title">Смотрите также:</h3>
+      </section>
+
+      <section id="catalog">
+        <div class="row justify-content-around">
+          <div class="col-6">
+            <div class="embed-responsive embed-responsive-4by3" style="background-image: url('/upload/catalog-1.png')"></div>
+            <h3>clutch</h3>
+            <div class="price">70 000 руб.</div>
+            <a href="#catalog-1" class="stretched-link"></a>
+          </div>
+          <div class="col-6 col-border-left">
+            <div class="embed-responsive embed-responsive-4by3" style="background-image: url('/upload/catalog-2.png')"></div>
+            <h3>outerwear</h3>
+            <div class="price">70 000 руб.</div>
+            <a href="#catalog-2" class="stretched-link"></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    //= template/footer.html
+  </body>
+</html>

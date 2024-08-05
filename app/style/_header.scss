@@ -1,0 +1,373 @@
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  height: 80px;
+  width: 100%;
+  background: $white;
+
+  .d-flex {
+    height: 100%;
+    padding: 0 11px;
+  }
+
+  .flex-center {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    height: 100%;
+    padding: 0 11px;
+
+    svg {
+      margin: 0 auto;
+    }
+  }
+
+  .logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .cart {
+    position: relative;
+
+    .cnt {
+      display: block;
+      position: absolute;
+      top: 19px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 19px;
+      height: 19px;
+      background: $black;
+      border-radius: 50%;
+      color: $white;
+      text-align: center;
+      line-height: 19px;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    height: 60px;
+
+    .d-flex {
+      padding: 0 7px;
+    }
+
+    .flex-center {
+      padding: 0 7px;
+    }
+
+    .shield {
+      svg {
+        //height: 22px;
+      }
+    }
+
+    .menu {
+      svg {
+        height: 10px;
+      }
+    }
+
+    .logo {
+      img {
+        height: 44px;
+      }
+    }
+
+    .cart {
+      svg {
+        height: 24px;
+      }
+
+      .cnt {
+        top: 13px;
+        width: 14px;
+        height: 14px;
+        font-size: 8px;
+        line-height: 12px;
+      }
+    }
+
+    .search {
+      svg {
+        height: 20px;
+      }
+    }
+  }
+}
+
+#dropdown {
+  position: fixed;
+  z-index: 98;
+  width: 100%;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+
+  &.is-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .dropdown-close {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background: rgba(148,141,136,0.1);
+    cursor: pointer;
+  }
+
+  .dropdown-slide {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    width: 100%;
+    max-width: 380px;
+    height: 100%;
+    overflow: auto;
+    background: $white;
+    border-top: 1px solid rgba(148,141,136,0.1);
+    transition: 0.3s;
+
+    &.left {
+      left: -380px;
+    }
+
+    &.right {
+      right: -380px;
+    }
+  }
+
+  &.open-menu .dropdown-slide.left {
+    left: 0;
+  }
+  &.open-cart .dropdown-slide.right {
+    right: 0;
+  }
+
+  ul.menu {
+    list-style: none;
+    padding-left: 0;
+    margin: 12px 22px;
+
+    li {
+      position: relative;
+
+      &.divider {
+        height: 1px;
+        width: 20px;
+        margin: 12px 0;
+        background: #BEB4AF;
+      }
+
+      a {
+        display: block;
+        text-transform: uppercase;
+        color: #BEB4AF;
+        padding: 12px 0;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+
+        &.active, &:hover {
+          color: $black;
+        }
+      }
+
+      .submenu-open {
+        position: absolute;
+        top: 12px;
+        right: 0;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+
+        &:before, &:after {
+          display: block;
+          content: ' ';
+          position: absolute;
+          top: 50%;
+          left: 2px;
+          width: 16px;
+          height: 1px;
+          background: #BEB4AF;
+          transition: 0.3s;
+        }
+        &:after {
+          transform: rotate(90deg);
+        }
+
+        &:hover {
+          &:before, &:after {
+            background: $black;
+          }
+        }
+
+        &.opened {
+          &:after {
+            display: none;
+          }
+
+          & + .submenu {
+            display: block;
+          }
+        }
+      }
+
+      ul.submenu {
+        list-style: none;
+        padding-left: 0;
+        margin-left: 11px;
+        display: none;
+
+        li {
+          a {
+            padding: 8px 0;
+            font-size: 12px;
+          }
+        }
+      }
+
+      @include media-breakpoint-down(xs) {
+        a {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  .cart-list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 130px;
+    padding: 22px;
+    overflow: auto;
+
+    h3 {
+      font-size: 14px;
+      font-weight: $font-weight-medium;
+      text-transform: uppercase;
+    }
+
+    p {
+      color: $gray;
+      font-size: 11px;
+    }
+
+    ul.cart {
+      padding-left: 0;
+      list-style: none;
+
+      li {
+        margin-top: 22px;
+
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+
+      .product-img {
+
+        div {
+          width: 125px;
+          height: 125px;
+        }
+      }
+
+      .product-info {
+        position: relative;
+        width: 100%;
+
+        .product-remove {
+          position: absolute;
+          top: -10px;
+          right: -10px;
+          cursor: pointer;
+          padding: 5px;
+        }
+
+        h6 {
+          font-weight: $font-weight-medium;
+          font-size: 12px;
+          text-transform: uppercase;
+        }
+
+        .price {
+          font-size: 10px;
+          color: $gray_medium;
+          text-transform: uppercase;
+        }
+
+        .product-counter {
+          font-size: 11px;
+          color: $gray;
+
+          button {
+            font-size: 12px;
+            font-weight: bold;
+            border: none;
+            background: none;
+            color: $gray;
+          }
+
+          input {
+            width: 20px;
+            text-align: center;
+            border: none;
+            color: $gray;
+          }
+        }
+      }
+    }
+  }
+
+  .cart-total {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 22px;
+    border-top: 1px solid rgba(148,141,136,0.1);
+    height: 130px;
+
+    .cart-total-amount,
+    .cart-total-price {
+      font-size: 14px;
+    }
+
+    .btn {
+      font-size: 14px;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    top: 60px;
+
+    .dropdown-slide {
+      max-width: 100%;
+
+      &.left {
+        left: -100%;
+      }
+
+      &.right {
+        right: -100%;
+      }
+    }
+  }
+}
