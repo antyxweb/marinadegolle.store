@@ -26,9 +26,9 @@ $APPLICATION->SetTitle("Личный кабинет");
                             </div>
                         </div>
 
-                        <div class="personal-error my-4" style="color: red"></div>
-
                         <button class="btn btn-primary p-3 d-block text-uppercase w-100">Войти</button>
+
+                        <div class="personal-error my-4" style="color: red"></div>
 
                         <div class="row">
                             <div class="col-6">
@@ -64,21 +64,65 @@ $APPLICATION->SetTitle("Личный кабинет");
 
                             $status = '';
                             $border = '';
-                            if($orderVal['PAYED'] == 'Y') {
-                                $status .= ' <span class="badge badge-success ml-2">Оплачен</span>';
+                            $paymentButton = '';
 
-                                if($orderVal['STATUS_ID'] == 'F') {
-                                    $status = ' <span class="badge badge-success ml-2">Выполнен</span>';
-                                } else if($orderVal['STATUS_ID'] == 'W') {
+                            if($orderVal['CANCELED'] == 'Y') {
+                                $status = ' <span class="badge badge-secondary ml-2">Отменен</span>';
+                            } else {
+
+                                if($orderVal['PAYED'] == 'Y') {
+                                    $status .= ' <span class="badge badge-success ml-2">Оплачен</span>';
+                                } else {
+                                    $status .= ' <span class="badge badge-danger ml-2">Не оплачен</span>';
+                                }
+
+                                if($orderVal['STATUS_ID'] == 'N') {
                                     $status .= ' <span class="badge badge-warning ml-2">Ожидает подтверждения</span>';
                                     $border = 'border-warning';
+                                } else if($orderVal['STATUS_ID'] == 'W') {
+                                    $status .= ' <span class="badge badge-warning ml-2">Ожидает оплаты</span>';
+                                    $border = 'border-warning';
                                 } else if($orderVal['STATUS_ID'] == 'D') {
-                                    $status .= ' <span class="badge badge-warning ml-2">На доставке</span>';
+                                    $status .= ' <span class="badge badge-warning ml-2">В доставке</span>';
+                                    $border = 'border-warning';
+                                } else if($orderVal['STATUS_ID'] == 'F') {
+                                    $status = ' <span class="badge badge-success ml-2">Выполнен</span>';
+                                    $border = 'border-success';
                                 }
-                            } else {
-                                $status .= ' <span class="badge badge-danger ml-2">Не оплачен</span>';
-                                $border = 'border-danger';
+
+                                if($orderVal['PAYED'] == 'N' && $orderVal['STATUS_ID'] == 'W') {
+                                    $propertyCollection = $order->getPropertyCollection();
+                                    $orderPaymentId = $propertyCollection->getItemByOrderPropertyId(7)->getValue();
+                                    $orderPaymentUrl = $propertyCollection->getItemByOrderPropertyId(8)->getValue();
+                                    $paymentButton .= '<a href="'.$orderPaymentUrl.'" class="btn btn-secondary p-3 d-block text-uppercase">Оплатить заказ</a>';
+
+                                    //Проверка оплаты
+                                    $client = new \YooKassa\Client();
+                                    $client->setAuth(YOOKASSA_LOGIN, YOOKASSA_PASSWORD);
+
+                                    try {
+                                        $response = $client->getPaymentInfo($orderPaymentId);
+                                    } catch (\Exception $e) {
+                                        $response = $e;
+                                    }
+
+                                    $paymentStatus = $response->getStatus();
+                                    if($paymentStatus == 'succeeded') {
+                                        $status = ' <span class="badge badge-warning ml-2">В доставке</span> <span class="badge badge-success ml-2">Оплачен</span>';
+                                        $border = 'border-warning';
+                                        $paymentButton = '';
+
+                                        $paymentCollection = $order->getPaymentCollection();
+                                        if(!$paymentCollection->isPaid()) {
+                                            $onePayment = $paymentCollection[0];
+                                            $onePayment->setPaid("Y");
+                                            $order->setField('STATUS_ID', 'D');
+                                            $order->save();
+                                        }
+                                    }
+                                }
                             }
+
                             ?>
                             <div class="border <?=$border?> p-4 mb-4">
                                 <div class="d-flex">
@@ -112,21 +156,22 @@ $APPLICATION->SetTitle("Личный кабинет");
                                                     <div class="embed-responsive embed-responsive-1by1" style="background-image: url('<?=$src?>');width: 100px;"></div>
                                                 </a>
                                             </td>
-                                            <td class="w-100 py-3 pl-3 pl-md-4">
+                                            <td class="py-3 pl-3 pl-md-4">
                                                 <p><?=$arItem['NAME']?></p>
-                                                <div class="price"><?=$arItem['BASE_PRICE']?number_format($arItem['BASE_PRICE'], 0, ',', ' ').' РУБ.':''?></div>
+                                                <div class="price"><?=$arItem['PRICE']?number_format($arItem['PRICE'], 0, ',', ' ').' РУБ.':''?></div>
                                             </td>
                                             <td class="py-3 pl-3 pl-md-4">
                                                 <?=$arItem['QUANTITY']?>&nbsp;шт.
                                             </td>
                                             <td class="py-3 pl-3 pl-md-4">
-                                                <div class="price"><?=number_format($arItem['BASE_PRICE']*$arItem['QUANTITY'], 0, ',', '&nbsp;')?>&nbsp;РУБ.</div>
+                                                <div class="price"><?=number_format($arItem['PRICE']*$arItem['QUANTITY'], 0, ',', '&nbsp;')?>&nbsp;РУБ.</div>
                                             </td>
                                         </tr>
                                         <?
                                     }
                                     ?>
                                 </table>
+                                <?=$paymentButton?>
                             </div>
                             <?
                         }

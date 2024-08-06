@@ -37,9 +37,9 @@ if($USER->IsAuthorized()) {
                         </div>
                     </div>
 
-                    <div class="personal-error my-4" style="color: red"></div>
-
                     <button class="btn btn-primary p-3 d-block text-uppercase w-100">Зарегистрироваться</button>
+
+                    <div class="personal-error my-4" style="color: red"></div>
 
                     <div class="row">
                         <div class="col-6">

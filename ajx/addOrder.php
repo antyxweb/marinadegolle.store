@@ -19,8 +19,30 @@ $currencyCode = CurrencyManager::getBaseCurrency();
 //Загружаем корзину
 $basket = \Bitrix\Sale\Basket::loadItemsForFUser(\Bitrix\Sale\Fuser::getId(), $siteId);
 
+$rsUser = CUser::GetByLogin($request['ORDER']['EMAIL']);
+$arUser = $rsUser->Fetch();
+if($arUser['ID']) {
+    $orderUserID = $arUser['ID'];
+} else {
+    $newPassword = randomPassword();
+    $arResult = $USER->Register($request['ORDER']['EMAIL'], $request['ORDER']['NAME'].' '.$request['ORDER']['SURNAME'], "", $newPassword, $newPassword, $request['ORDER']['EMAIL']);
+    $orderUserID = $USER->GetID();
+
+    CEvent::Send(
+        "NEW_USER",
+        's1',
+        array(
+            "R_EMAIL" => $request['EMAIL'],
+            "R_NAME" => $request['NAME'],
+            "R_PASSWORD" => 'Ваш пароль для входа: '.$newPassword,
+        ),
+        '',
+        52
+    );
+}
+
 // Создаёт новый заказ
-$order = Order::create($siteId, $USER->GetID());
+$order = Order::create($siteId, $orderUserID);
 $order->setPersonTypeId(1);
 $order->setField('CURRENCY', $currencyCode);
 
