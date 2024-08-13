@@ -32,8 +32,8 @@ if($arUser['ID']) {
         "NEW_USER",
         's1',
         array(
-            "R_EMAIL" => $request['EMAIL'],
-            "R_NAME" => $request['NAME'],
+            "R_EMAIL" => $request['ORDER']['EMAIL'],
+            "R_NAME" => $request['ORDER']['NAME'],
             "R_PASSWORD" => 'Ваш пароль для входа: '.$newPassword,
         ),
         '',
@@ -119,6 +119,8 @@ if (!$result->isSuccess())
 } else {
     //Выводим ID заказа
     $orderId = $order->getId();
+
+    send_whatsapp("Новый заказ #".$orderId." от ".$request['ORDER']['NAME']." ".$request['ORDER']['PHONE']);
 
     echo json_encode([
         'SUCCESS' => true,
